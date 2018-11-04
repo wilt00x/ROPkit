@@ -9,11 +9,11 @@ Python 2.7.x
 Git 
 
 #### Building from source
-`$ git clone https://github.com/wiltor/ropkit` 
+`$ git clone https://github.com/non0c/ROPkit` 
 
 After, change directory and run the `installer` as root's priviliges.
 
-`# cd /path/.../ropkit/ && python installer.py` 
+`# cd /path/to/ropkit/ && python installer.py` 
 
 Once finished, execute with: 
 
