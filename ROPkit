@@ -1,0 +1,79 @@
+#!/usr/bin/python2.7
+
+from core import *
+from modules import *
+
+def start(): 
+	while True: 
+		try:
+			command = raw_input(SHELL+RB+" > "+W)
+			tokenized = command.split(" ")
+
+			if tokenized[0] == "quit" or tokenized[0] == "q":
+				break
+			if tokenized[0] == "clear" or tokenized[0] == "cls":
+				os.system("clear")
+				continue
+			if tokenized[0] == "help": 
+				help_struct()
+				continue
+			if tokenized[0] == "show": 
+				if tokenized[1] == "commands": 
+					print(W+"\n[Commands]")
+					print("----------\n")
+					print(W+"\n(Core):")
+					print("---------------\n") 
+					sys.stdout.write(G+"	[ use ]"+W)
+					sys.stdout.write("		Use one or more modules\n\n")
+					continue
+				elif tokenized[1] == "version": 
+					print("ROPkit "+VERSION)
+					continue
+				if tokenized[1] == "modules": 
+					print(W+"\n[Modules]")
+					print("---------\n")
+					#print(W+"\n(Shellcode injectors):")
+					#print("----------------------\n")
+					#sys.stdout.write(G+"	[ /she-inj/basic ]"+W)
+					#sys.stdout.write("	Inject a basic shellcode by env")
+					#sys.stdout.write("   09/09/18\n")
+					#sys.stdout.write(G+"	[ /she-inj/polymorphic ]"+W)
+					#sys.stdout.write("	Inject a polymorphic shellcode by env")
+					#sys.stdout.write("   09/09/18\n")
+					print(W+"\n(Exploitation methods):")
+					print("-----------------------\n")
+					sys.stdout.write(G+"	[ /exp-met/ret2libc ]"+W)
+					sys.stdout.write("	Exploit vulnerabilites using libc functions")
+					sys.stdout.write("   09/09/18\n\n")
+					continue
+				else: 
+					print(F_M+" Unknown option: "+tokenized[1]+".")
+					continue
+			if tokenized[0] == "use":
+				if tokenized[1] == "ret2libc" or tokenized[1] == "/exp-met/ret2libc":
+					rettolibc_module()
+					continue
+				else: 
+					print(F_M+" Unknown module: "+tokenized[1]+".")
+					continue
+			if tokenized[0] == "set":
+			    print(F_M+" For use this command, choose one module to use.")
+			    continue
+			if tokenized[0] == "sh" or tokenized[0] == "bash" or tokenized[0] == "fish": 
+				print(R_M+" open shell: '%s'."%tokenized[0])
+				os.system(tokenized[0])
+				continue
+			else: 
+				print(WARN+tokenized[0]+".")
+				continue
+
+		except (KeyboardInterrupt, EOFError): 
+			print WARN_INT
+		except IndexError: 
+			print(F_M+" Options not found after: "+tokenized[0]+".")
+
+if __name__ == "__main__":
+	os.system("clear")
+	print(header+middle)
+
+	start()
